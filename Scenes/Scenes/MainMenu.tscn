@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Font/DownHillFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/GUI/Buttons.gd" type="Script" id=2]
+
+[node name="Main Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -127.0
+margin_top = -57.0
+margin_right = 2017.0
+margin_bottom = 1157.0
+color = Color( 0.662745, 0.72549, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu UI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Menu UI"]
+anchor_right = 25.343
+anchor_bottom = 12.412
+margin_left = 416.0
+margin_top = 112.0
+margin_right = 486.28
+margin_bottom = -247.48
+custom_fonts/font = ExtResource( 1 )
+text = "Super Mario Fanmade
+            Bros"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="Menu UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadMap_btn" type="Button" parent="Menu UI/Buttons"]
+margin_left = 352.0
+margin_top = 520.0
+margin_right = 1024.0
+margin_bottom = 680.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 1 )
+text = "load map"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Menu UI/Buttons/LoadMap_btn" to="Menu UI/Buttons" method="_on_LoadMap_btn_pressed"]

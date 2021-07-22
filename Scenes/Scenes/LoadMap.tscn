@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Font/DownHillFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/GUI/OpenFile.gd" type="Script" id=2]
+[ext_resource path="res://Font/GUIFont.tres" type="DynamicFont" id=3]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 3 )
+
+[node name="LoadMap" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+margin_left = -104.0
+margin_top = -40.0
+margin_right = 2040.0
+margin_bottom = 1174.0
+color = Color( 0.662745, 0.72549, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GUI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="GUI"]
+margin_left = 624.0
+margin_top = 288.0
+margin_right = 1648.0
+margin_bottom = 416.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="GUI"]
+margin_left = 624.0
+margin_top = 448.0
+margin_right = 1184.0
+margin_bottom = 560.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 1 )
+text = "Open File"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="GUI"]
+margin_left = 392.0
+margin_top = 216.0
+margin_right = 1417.0
+margin_bottom = 872.0
+theme = SubResource( 1 )
+popup_exclusive = true
+window_title = "Open a File"
+mode = 0
+access = 2
+current_dir = "/"
+current_path = "/"
+
+[node name="Map" type="Node" parent="."]
+
+[connection signal="pressed" from="GUI/Button" to="GUI" method="_on_Button_pressed"]
