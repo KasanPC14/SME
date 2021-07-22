@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export var speed = 250
-export var accuration = 10
+export var accuration = 5
 export var jump = -450
 export var gravity = 20
 
@@ -35,12 +35,16 @@ func set_keys():
 
 func movement():
 	
+	
 	if LEFT:
 		motion.x -= accuration
 	elif RIGHT:
 		motion.x += accuration
-	else:
-		motion.x = 0
+		
+	if motion.x > 0 and !RIGHT and onGround:
+		motion.x -= 10
+	if motion.x < 0 and !LEFT and onGround:
+		motion.x += 10
 	
 	if motion.x > speed:
 		motion.x = speed
@@ -80,9 +84,9 @@ func set_animations():
 		
 	###################################
 	
-	if motion.x > 0 && LEFT:
+	if motion.x > 0 and LEFT and !RIGHT and onGround:
 		animSpr.animation = "Slowing"
 		animSpr.flip_h = true
-	elif motion.x < 0 && RIGHT:
+	if motion.x < 0 and RIGHT and !LEFT and onGround:
 		animSpr.animation = "Slowing"
 		animSpr.flip_h = false
