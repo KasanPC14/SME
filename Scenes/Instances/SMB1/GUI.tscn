@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Font/DownHillFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Coin.tres" type="SpriteFrames" id=2]
+
+[node name="GUI" type="Control"]
+margin_right = 1920.0
+margin_bottom = 1072.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InGame" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="COIN" type="Control" parent="InGame"]
+margin_left = 848.0
+margin_top = 16.0
+margin_right = 888.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="InGame/COIN"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 2 )
+animation = "Overworld"
+
+[node name="X" type="Label" parent="InGame/COIN"]
+margin_left = 32.0
+margin_top = 6.30673
+margin_right = 152.0
+margin_bottom = 106.307
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = ExtResource( 1 )
+text = "x"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoinNum" type="Label" parent="InGame/COIN"]
+margin_left = 51.761
+margin_top = 9.24987
+margin_right = 185.761
+margin_bottom = 109.25
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = ExtResource( 1 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}

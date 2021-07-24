@@ -1,6 +1,6 @@
 extends Node
 
-var onBrick = preload("res://Scenes/Instances/Tiles/Brick.tscn")
+var onBrick = preload("res://Scenes/Instances/SMB1/Tiles/Brick.tscn")
 
 export (int) var MAP_WIDTH = 100
 export (int) var MAP_HEIGHT = 3

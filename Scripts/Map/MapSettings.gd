@@ -18,3 +18,7 @@ func _ready():
 	
 	
 	pass
+
+func transferData(old,new) -> void:
+	new.get_node("Player").playerParameters = old.get_node("Player").playerParameters 
+	pass
