@@ -1,24 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Gameplay/CameraFollow.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/SMB1/SpriteFrames/Mario.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Sounds/SMB1/Player/Jump.wav" type="AudioStream" id=3]
-[ext_resource path="res://Scripts/Gameplay/Player.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Instances/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Map/MapLoader.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Map/MapSettings.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/Gameplay/SoundManager.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Coin.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://Font/DownHillFont.tres" type="DynamicFont" id=9]
 [ext_resource path="res://Sounds/SMB1/Tiles/Coin.wav" type="AudioStream" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.46205, 7.36823 )
-
 [node name="TestLevel" type="Node2D"]
 script = ExtResource( 6 )
-WorldType = "Overworld"
-Color_overworld = Color( 0.635294, 0.705882, 1, 1 )
-Color_underground = Color( 0, 0, 0.2, 1 )
 
 [node name="Background" type="ColorRect" parent="."]
 margin_left = -96.0
@@ -29,26 +20,6 @@ color = Color( 0.662745, 0.72549, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
-
-[node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 16, 752 )
-scale = Vector2( 2, 2 )
-script = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource( 1 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
-frames = ExtResource( 2 )
-animation = "Slowing"
-playing = true
-
-[node name="Sounds" type="Node" parent="Player"]
-script = ExtResource( 7 )
-
-[node name="Jump" type="AudioStreamPlayer" parent="Player/Sounds"]
-stream = ExtResource( 3 )
-volume_db = -7.301
 
 [node name="Map" type="Node2D" parent="."]
 script = ExtResource( 5 )
@@ -131,3 +102,5 @@ scale = Vector2( 2, 2 )
 stream = ExtResource( 10 )
 
 [node name="AirBricks" type="Node2D" parent="Map/Map"]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]

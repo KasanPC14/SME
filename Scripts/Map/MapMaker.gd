@@ -4,11 +4,14 @@ var mouse_pos = Vector2()
 
 onready var Brick = load("res://Scenes/Instances/SMB1/Tiles/Brick.tscn")
 onready var AirBrick = load("res://Scenes/Instances/SMB1/Tiles/AirBrick.tscn")
+onready var Block = load("res://Scenes/Instances/SMB1/Tiles/Block.tscn")
 onready var Coin = load("res://Scenes/Instances/SMB1/Tiles/Coin.tscn")
 
 var selected = null
 var selectedTile = null
 var selectedTileName = ""
+
+var onGui = false
 
 var newBrick = null
 
@@ -26,8 +29,11 @@ var mapData = {
 		
 		"tiles": {
 			"Bricks": [],
+			"AirBricks": [],
+			"Blocks": [],
 			"Coins": [],
-			"AirBricks": []
+			
+			
 		}
 	}
 }
@@ -45,8 +51,8 @@ func _ready():
 func _physics_process(delta):
 	mouse_pos = get_global_mouse_position()
 	_showSelected()
-	
-	if Input.is_action_pressed("Mouse1"):
+	print(mapData["map"]["tiles"]["Bricks"].size())
+	if Input.is_action_pressed("Mouse1") and !onGui:
 		_putTile()
 	if Input.is_action_just_pressed("R"):
 		player.position = playerStart
@@ -86,7 +92,7 @@ func _putTile():
 	for i in mapData["map"]["tiles"].values().size():
 		if mapData["map"]["tiles"].values()[i] != []:
 			for j in mapData["map"]["tiles"].values()[i].size():
-				if Vector2(mapData["map"]["tiles"].values()[i][j]["position"]["x"],mapData["map"]["tiles"].values()[i][j]["position"]["y"]) == newBrick.position:
+				if Vector2(mapData["map"]["tiles"].values()[i][j]["position"]["x"],mapData["map"]["tiles"].values()[i][j]["position"]["y"]) == _getVector(newBrick.position):
 					canPut = false
 					
 		
@@ -96,8 +102,50 @@ func _putTile():
 		newTile.position = newBrick.position
 		get_node("Map/" + selectedTileName).add_child(newTile)
 	
-		mapData["map"]["tiles"][selectedTileName].append({"position": {"x": newTile.position.x, "y":newTile.position.y}})
+		mapData["map"]["tiles"][selectedTileName].append({"position": {"x": _getPositions(newTile.position.x), "y":_getPositions(newTile.position.y)}})
 	
 	pass
 
+
+func _changeBlock(obj,objname):
+	selectedTile = obj
+	selectedTileName = objname
+	get_node("selected").queue_free()
+	
+
+
+
+func _on_AirBrick():
+	_changeBlock(AirBrick,"AirBricks")
+	pass # Replace with function body.
+
+func _on_Brick():
+	_changeBlock(Brick,"Bricks")
+	pass
+
+func _on_Block():
+	_changeBlock(Block,"Blocks")
+	pass
+
+func _on_Coin():
+	_changeBlock(Coin,"Coins")
+	pass
+
+func _on_gui_mouse_entered():
+	onGui = true
+	pass # Replace with function body.
+
+
+func _on_gui_mouse_exited():
+	onGui = false
+	pass # Replace with function body.
+
+func _getPositions(val):
+	var result = (val-16)/32
+	return result
+	
+	
+func _getVector(v2):
+	var result = Vector2((v2.x-16)/32, (v2.y-16)/32)
+	return result
 

@@ -7,7 +7,9 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	#$AnimatedSprite.animation = get_parent().get_parent().get_parent().get_parent().WorldType
+	#print(get_parent().get_parent().get_parent().get_parent().name)
+	get_node("AnimatedSprite").animation = get_tree().root.get_child(1).WorldType
+	
 	pass
 
 func _on_Alt_body_entered(body):

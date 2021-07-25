@@ -6,13 +6,14 @@
 [ext_resource path="res://Scripts/Gameplay/CameraFollow.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Map/MapLoader.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Map/MapSettings.gd" type="Script" id=6]
-[ext_resource path="res://Sounds/SMB1/Tiles/Coin.wav" type="AudioStream" id=9]
+[ext_resource path="res://Scenes/Instances/Map.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Coin.tres" type="SpriteFrames" id=10]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
 
 [node name="LoadMap" type="Node2D"]
+script = ExtResource( 6 )
 
 [node name="GUI" type="Control" parent="."]
 margin_right = 40.0
@@ -62,7 +63,6 @@ current_path = "/"
 
 [node name="Level" type="Node2D" parent="."]
 visible = false
-script = ExtResource( 6 )
 
 [node name="Map" type="Node2D" parent="Level"]
 script = ExtResource( 5 )
@@ -148,18 +148,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Map" type="Node2D" parent="Level/Map"]
-
-[node name="Bricks" type="Node2D" parent="Level/Map/Map"]
-
-[node name="Coins" type="Node2D" parent="Level/Map/Map"]
-
-[node name="CoinSound" type="AudioStreamPlayer2D" parent="Level/Map/Map/Coins"]
-position = Vector2( 272, 688 )
-scale = Vector2( 2, 2 )
-stream = ExtResource( 9 )
-
-[node name="AirBricks" type="Node2D" parent="Level/Map/Map"]
+[node name="Map" parent="Level/Map" instance=ExtResource( 7 )]
 
 [connection signal="pressed" from="GUI/Button" to="GUI" method="_on_Button_pressed"]
 [connection signal="file_selected" from="GUI/FileDialog" to="GUI" method="_on_FileDialog_file_selected"]

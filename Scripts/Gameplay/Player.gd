@@ -23,11 +23,11 @@ var onGround = false
 var isMoving = false
 var isRunning = false
 
-var LEFT = null
-var RIGHT = null
-var C = null
-var X = null
-var Z = null
+var K_LEFT = null
+var K_RIGHT = null
+var K_C = null
+var K_X = null
+var K_Z = null
 
 var Sounds = null
 
@@ -49,11 +49,11 @@ func _physics_process(delta):
 	
 
 func set_keys():
-	LEFT = Input.is_action_pressed("LEFT")
-	RIGHT = Input.is_action_pressed("RIGHT")
-	Z = Input.is_action_just_pressed("Z")
-	X = Input.is_action_pressed("X")
-	C = Input.is_action_pressed("C")
+	K_LEFT = Input.is_action_pressed("LEFT")
+	K_RIGHT = Input.is_action_pressed("RIGHT")
+	K_Z = Input.is_action_just_pressed("Z")
+	K_X = Input.is_action_pressed("X")
+	K_C = Input.is_action_pressed("C")
 	
 
 func movement():
@@ -61,19 +61,19 @@ func movement():
 	if motion.x < accuration and motion.x > -accuration:
 		motion.x = 0
 	
-	if LEFT:
+	if K_LEFT:
 		motion.x -= accuration
-	elif RIGHT:
+	elif K_RIGHT:
 		motion.x += accuration
 		
-	if motion.x > 0 and !RIGHT and onGround:
+	if motion.x > 0 and !K_RIGHT and onGround:
 		motion.x -= accuration
-	if motion.x < 0 and !LEFT and onGround:
+	if motion.x < 0 and !K_LEFT and onGround:
 		motion.x += accuration
 	
-	if motion.x > 0 and !RIGHT and !onGround:
+	if motion.x > 0 and !K_RIGHT and !onGround:
 		motion.x -= accuration/4
-	if motion.x < 0 and !LEFT and !onGround:
+	if motion.x < 0 and !K_LEFT and !onGround:
 		motion.x += accuration/4
 	
 	if !isRunning:
@@ -87,11 +87,11 @@ func movement():
 		elif motion.x < -max_speed:
 			motion.x = -max_speed
 	
-	if Z and onGround:
+	if K_Z and onGround:
 		motion.y = jump
 		Sounds.play("Jump")
 		
-	if C:
+	if K_C:
 		isRunning = true
 	else:
 		isRunning = false
@@ -137,10 +137,10 @@ func set_animations():
 		
 	###################################
 	
-	if motion.x > 0 and LEFT and !RIGHT and onGround:
+	if motion.x > 0 and K_LEFT and !K_RIGHT and onGround:
 		animSpr.animation = "Slowing"
 		animSpr.flip_h = true
-	if motion.x < 0 and RIGHT and !LEFT and onGround:
+	if motion.x < 0 and K_RIGHT and !K_LEFT and onGround:
 		animSpr.animation = "Slowing"
 		animSpr.flip_h = false
 

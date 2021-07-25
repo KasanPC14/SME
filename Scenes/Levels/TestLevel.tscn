@@ -13,24 +13,14 @@
 [ext_resource path="res://Scripts/Tiles/AirBrick.gd" type="Script" id=14]
 [ext_resource path="res://Sounds/SMB1/Tiles/Bump.wav" type="AudioStream" id=15]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.02103, 7.9902 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6.2569, 0.193512 )
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource( 6 )
-
-[node name="Background" type="ColorRect" parent="."]
-margin_left = -96.0
-margin_top = -48.0
-margin_right = 2048.0
-margin_bottom = 1166.0
-color = Color( 0.662745, 0.72549, 1, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Map" type="Node2D" parent="."]
 script = ExtResource( 5 )
@@ -38,7 +28,7 @@ script = ExtResource( 5 )
 [node name="Camera2D" type="Camera2D" parent="Map"]
 current = true
 zoom = Vector2( 0.5, 0.5 )
-limit_left = 0
+limit_left = -1000
 limit_top = 312
 limit_bottom = 0
 script = ExtResource( 1 )
@@ -97,6 +87,16 @@ margin_bottom = 109.25
 rect_scale = Vector2( 0.25, 0.25 )
 custom_fonts/font = ExtResource( 9 )
 text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="Map/Camera2D/GUI"]
+margin_left = -816.0
+margin_top = -32.0
+margin_right = 1328.0
+margin_bottom = 1182.0
+color = Color( 0.662745, 0.72549, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -253,7 +253,7 @@ position = Vector2( 304, 720 )
 [node name="Coin4" parent="Map/Map/Coins" instance=ExtResource( 11 )]
 position = Vector2( 272, 720 )
 
-[node name="CoinSound" type="AudioStreamPlayer2D" parent="Map/Map/Coins"]
+[node name="CSound" type="AudioStreamPlayer2D" parent="Map/Map/Coins"]
 position = Vector2( 272, 688 )
 scale = Vector2( 2, 2 )
 stream = ExtResource( 10 )
@@ -266,7 +266,7 @@ scale = Vector2( 2, 2 )
 script = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Map/AirBricks/AirBrick"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Map/Map/AirBricks/AirBrick"]
 frames = ExtResource( 13 )
@@ -283,10 +283,12 @@ animation = "Overworld"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Map/AirBricks/AirBrick/Alt"]
 modulate = Color( 0.00784314, 1, 0, 1 )
 position = Vector2( 0, 8 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Map/Map/AirBricks/AirBrick"]
 stream = ExtResource( 15 )
+
+[node name="Blocks" type="Node2D" parent="Map/Map"]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 720 )

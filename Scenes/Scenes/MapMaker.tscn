@@ -1,17 +1,32 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Gameplay/CameraFollow.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Instances/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Map/MapMaker.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Instances/SMB1/Tiles/AirBrick.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/AirBrick.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://Scripts/Map/MakerScript.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Map/MapSettings.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Map/MapMakerLoader.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Coin.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://Font/DownHillFont.tres" type="DynamicFont" id=9]
-[ext_resource path="res://Sounds/SMB1/Tiles/Coin.wav" type="AudioStream" id=10]
-[ext_resource path="res://Scenes/Instances/SMB1/Tiles/Coin.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Instances/SMB1/Tiles/Brick.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Instances/Map.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Brick.tres" type="SpriteFrames" id=11]
+[ext_resource path="res://Scripts/GUI/setSprites.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/Map/MapMakerPlayer.gd" type="Script" id=13]
+[ext_resource path="res://Font/GUIFont.tres" type="DynamicFont" id=14]
+[ext_resource path="res://Font/DownHill64.tres" type="DynamicFont" id=15]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Block.tres" type="SpriteFrames" id=16]
 
-[node name="TestLevel" type="Node2D"]
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 15 )
+
+[sub_resource type="Theme" id=2]
+default_font = ExtResource( 15 )
+
+[sub_resource type="Theme" id=3]
+default_font = ExtResource( 14 )
+
+[node name="MapMaker" type="Node2D"]
 script = ExtResource( 6 )
 
 [node name="Map" type="Node2D" parent="."]
@@ -40,16 +55,17 @@ __meta__ = {
 }
 
 [node name="Background" type="ColorRect" parent="Map/Camera2D/GUI"]
-margin_left = 96.0
-margin_top = -320.0
-margin_right = 2240.0
-margin_bottom = 894.0
+margin_left = 48.0
+margin_top = -384.0
+margin_right = 2192.0
+margin_bottom = 830.0
 color = Color( 0.662745, 0.72549, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="InGame" type="Control" parent="Map/Camera2D/GUI"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -95,166 +111,138 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Map" type="Node2D" parent="Map"]
+[node name="Map" parent="Map" instance=ExtResource( 10 )]
 
-[node name="Bricks" type="Node2D" parent="Map/Map"]
-
-[node name="Brick" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 16, 784 )
-
-[node name="Brick2" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 16, 816 )
-
-[node name="Brick3" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 16, 848 )
-
-[node name="Brick4" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 48, 848 )
-
-[node name="Brick5" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 48, 816 )
-
-[node name="Brick6" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 48, 784 )
-
-[node name="Brick7" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 80, 784 )
-
-[node name="Brick8" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 80, 816 )
-
-[node name="Brick9" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 80, 848 )
-
-[node name="Brick10" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 112, 784 )
-
-[node name="Brick11" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 112, 816 )
-
-[node name="Brick12" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 112, 848 )
-
-[node name="Brick13" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 144, 848 )
-
-[node name="Brick14" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 144, 816 )
-
-[node name="Brick15" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 144, 784 )
-
-[node name="Brick16" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 176, 784 )
-
-[node name="Brick17" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 176, 816 )
-
-[node name="Brick18" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 176, 848 )
-
-[node name="Brick19" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 208, 784 )
-
-[node name="Brick20" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 208, 816 )
-
-[node name="Brick21" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 208, 848 )
-
-[node name="Brick22" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 240, 848 )
-
-[node name="Brick23" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 240, 816 )
-
-[node name="Brick24" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 240, 784 )
-
-[node name="Brick25" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 272, 784 )
-
-[node name="Brick26" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 272, 816 )
-
-[node name="Brick27" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 272, 848 )
-
-[node name="Brick28" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 400, 784 )
-
-[node name="Brick29" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 400, 816 )
-
-[node name="Brick30" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 400, 848 )
-
-[node name="Brick31" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 432, 848 )
-
-[node name="Brick32" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 432, 816 )
-
-[node name="Brick33" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 432, 784 )
-
-[node name="Brick34" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 464, 784 )
-
-[node name="Brick35" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 464, 816 )
-
-[node name="Brick36" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 464, 848 )
-
-[node name="Brick37" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 496, 784 )
-
-[node name="Brick38" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 496, 816 )
-
-[node name="Brick39" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 496, 848 )
-
-[node name="Brick40" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 528, 848 )
-
-[node name="Brick41" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 528, 816 )
-
-[node name="Brick42" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 528, 784 )
-
-[node name="Brick43" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 560, 784 )
-
-[node name="Brick44" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 560, 816 )
-
-[node name="Brick45" parent="Map/Map/Bricks" instance=ExtResource( 12 )]
-position = Vector2( 560, 848 )
-
-[node name="Coins" type="Node2D" parent="Map/Map"]
-
-[node name="Coin" parent="Map/Map/Coins" instance=ExtResource( 11 )]
-
-[node name="Coin2" parent="Map/Map/Coins" instance=ExtResource( 11 )]
-position = Vector2( 304, 688 )
-
-[node name="Coin3" parent="Map/Map/Coins" instance=ExtResource( 11 )]
-position = Vector2( 304, 720 )
-
-[node name="Coin4" parent="Map/Map/Coins" instance=ExtResource( 11 )]
-position = Vector2( 272, 720 )
-
-[node name="CoinSound" type="AudioStreamPlayer2D" parent="Map/Map/Coins"]
-position = Vector2( 272, 688 )
-scale = Vector2( 2, 2 )
-stream = ExtResource( 10 )
-
-[node name="AirBricks" type="Node2D" parent="Map/Map"]
-
-[node name="AirBrick" parent="Map/Map/AirBricks" instance=ExtResource( 4 )]
+[node name="Loader" type="Node2D" parent="Map"]
+script = ExtResource( 7 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 720 )
+script = ExtResource( 13 )
+
+[node name="Maker" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Tiles" type="Panel" parent="Maker"]
+modulate = Color( 1, 1, 1, 0.443137 )
+margin_left = -496.0
+margin_top = 304.0
+margin_right = 480.0
+margin_bottom = 384.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Brick_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -464.0
+margin_top = 320.0
+margin_right = -416.0
+margin_bottom = 368.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/Brick_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 11 )
+animation = "Overworld"
+
+[node name="AirBrick_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -400.0
+margin_top = 320.0
+margin_right = -352.0
+margin_bottom = 368.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/AirBrick_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 4 )
+animation = "Overworld"
+
+[node name="Block_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -336.0
+margin_top = 320.0
+margin_right = -288.0
+margin_bottom = 368.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/Block_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 16 )
+animation = "Overworld"
+
+[node name="Coin_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -272.0
+margin_top = 320.0
+margin_right = -224.0
+margin_bottom = 368.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/Coin_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 8 )
+animation = "Overworld"
+
+[node name="Load_btn" type="Button" parent="Maker"]
+margin_left = 416.0
+margin_top = 320.0
+margin_right = 608.0
+margin_bottom = 512.0
+rect_scale = Vector2( 0.25, 0.25 )
+theme = SubResource( 1 )
+text = "Load"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save_btn" type="Button" parent="Maker"]
+margin_left = 352.0
+margin_top = 320.0
+margin_right = 544.0
+margin_bottom = 512.0
+rect_scale = Vector2( 0.25, 0.25 )
+theme = SubResource( 2 )
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="Maker"]
+margin_left = -144.0
+margin_top = 448.0
+margin_right = 320.0
+margin_bottom = 752.0
+theme = SubResource( 3 )
+window_title = "Bir Dosya Aç"
+mode = 0
+access = 2
+current_dir = "/"
+current_path = "/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="mouse_entered" from="Maker/Tiles" to="Map" method="_on_gui_mouse_entered"]
+[connection signal="mouse_exited" from="Maker/Tiles" to="Map" method="_on_gui_mouse_exited"]
+[connection signal="pressed" from="Maker/Load_btn" to="Maker" method="_on_Load_btn_pressed"]
+[connection signal="pressed" from="Maker/Save_btn" to="Maker" method="_on_Save_btn_pressed"]
+[connection signal="file_selected" from="Maker/FileDialog" to="Maker" method="_on_FileDialog_file_selected"]
+[connection signal="file_selected" from="Maker/FileDialog" to="Map/Loader" method="_on_FileDialog_file_selected"]
