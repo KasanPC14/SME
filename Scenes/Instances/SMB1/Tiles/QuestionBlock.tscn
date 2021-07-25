@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/Tiles/TilePump.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/QuestionBlock.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Sounds/SMB1/Tiles/Coin.wav" type="AudioStream" id=3]
+[ext_resource path="res://Scenes/Instances/Features/Pump.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sounds/SMB1/Tiles/Bump.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scripts/Tiles/QuestionBlock.gd" type="Script" id=6]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 0.193512 )
+
+[node name="QuestionBlock" type="KinematicBody2D"]
+position = Vector2( 80, 720 )
+script = ExtResource( 6 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -4.76837e-07, 4.76837e-07 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 2 )
+animation = "Overworld"
+playing = true
+
+[node name="Pump" type="Node2D" parent="." instance=ExtResource( 4 )]
+script = ExtResource( 1 )
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Area"]
+modulate = Color( 0.00784314, 1, 0, 1 )
+position = Vector2( 0, 16 )
+shape = SubResource( 4 )
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+
+[node name="CoinSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

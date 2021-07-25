@@ -6,6 +6,10 @@ onready var Brick = load("res://Scenes/Instances/SMB1/Tiles/Brick.tscn")
 onready var AirBrick = load("res://Scenes/Instances/SMB1/Tiles/AirBrick.tscn")
 onready var Block = load("res://Scenes/Instances/SMB1/Tiles/Block.tscn")
 onready var Coin = load("res://Scenes/Instances/SMB1/Tiles/Coin.tscn")
+onready var OffBlock = load("res://Scenes/Instances/SMB1/Tiles/OffBlock.tscn")
+onready var OnBlock = load("res://Scenes/Instances/SMB1/Tiles/OnBlock.tscn")
+onready var QuestionBlock = load("res://Scenes/Instances/SMB1/Tiles/QuestionBlock.tscn")
+onready var SwitchBlock = load("res://Scenes/Instances/SMB1/Tiles/SwitchBlock.tscn")
 
 var selected = null
 var selectedTile = null
@@ -32,6 +36,10 @@ var mapData = {
 			"AirBricks": [],
 			"Blocks": [],
 			"Coins": [],
+			"OffBlocks": [],
+			"OnBlocks": [],
+			"SwitchBlocks": [],
+			"QuestionBlocks": []
 			
 			
 		}
@@ -46,14 +54,19 @@ func _ready():
 	selectedTile = Brick
 	selectedTileName = "Bricks"
 	playerStart = player.position
+	
 	pass
 
 func _physics_process(delta):
+	print(mapData["map"]["tiles"]["Bricks"].size())
 	mouse_pos = get_global_mouse_position()
 	_showSelected()
-	print(mapData["map"]["tiles"]["Bricks"].size())
+	
 	if Input.is_action_pressed("Mouse1") and !onGui:
 		_putTile()
+	if Input.is_action_pressed("Mouse2") and !onGui:
+		_deleteTile()	
+	
 	if Input.is_action_just_pressed("R"):
 		player.position = playerStart
 	
@@ -100,20 +113,32 @@ func _putTile():
 	if canPut:	
 		var newTile = selectedTile.instance()
 		newTile.position = newBrick.position
+		newTile.data = {"position": {"x": _getPositions(newTile.position.x), "y":_getPositions(newTile.position.y)}}
 		get_node("Map/" + selectedTileName).add_child(newTile)
-	
+		
 		mapData["map"]["tiles"][selectedTileName].append({"position": {"x": _getPositions(newTile.position.x), "y":_getPositions(newTile.position.y)}})
 	
 	pass
 
-
+func _deleteTile():
+	var canDel = true
+	
+	for i in mapData["map"]["tiles"].values().size(): #i = all tiles
+		if mapData["map"]["tiles"].values()[i] != []: #if not empty
+			for child in get_node("Map").get_children():
+				for num in child.get_child_count():
+					if  !("Sound" in child.get_child(num).name):
+						if _getVector(child.get_child(num).position) == _getVector(newBrick.position):
+							
+							child.get_child(num).queue_free()
+					
+					
+				
 func _changeBlock(obj,objname):
 	selectedTile = obj
 	selectedTileName = objname
 	get_node("selected").queue_free()
 	
-
-
 
 func _on_AirBrick():
 	_changeBlock(AirBrick,"AirBricks")
@@ -130,6 +155,18 @@ func _on_Block():
 func _on_Coin():
 	_changeBlock(Coin,"Coins")
 	pass
+
+func _on_OffBlock():
+	_changeBlock(OffBlock,"OffBlocks")
+
+func _on_OnBlock():
+	_changeBlock(OnBlock,"OnBlocks")
+
+func _on_SwitchBlock():
+	_changeBlock(SwitchBlock,"SwitchBlocks")
+
+func _on_QuestionBlock():
+	_changeBlock(QuestionBlock,"QuestionBlocks")
 
 func _on_gui_mouse_entered():
 	onGui = true

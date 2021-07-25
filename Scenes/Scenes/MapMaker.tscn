@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/Gameplay/CameraFollow.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Instances/Player.tscn" type="PackedScene" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://Font/GUIFont.tres" type="DynamicFont" id=14]
 [ext_resource path="res://Font/DownHill64.tres" type="DynamicFont" id=15]
 [ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Block.tres" type="SpriteFrames" id=16]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/OffBlock.tres" type="SpriteFrames" id=17]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/OnBlock.tres" type="SpriteFrames" id=18]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/OnOffSwitch.tres" type="SpriteFrames" id=19]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/QuestionBlock.tres" type="SpriteFrames" id=20]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 15 )
@@ -184,11 +188,76 @@ scale = Vector2( 1.95433, 2 )
 frames = ExtResource( 16 )
 animation = "Overworld"
 
-[node name="Coin_btn" type="Button" parent="Maker"]
+[node name="QuestionBlock_btn" type="Button" parent="Maker"]
 self_modulate = Color( 0, 0, 0, 0.294118 )
 margin_left = -272.0
 margin_top = 320.0
 margin_right = -224.0
+margin_bottom = 368.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/QuestionBlock_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 20 )
+animation = "Overworld"
+
+[node name="OnBlock_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -144.0
+margin_top = 320.0
+margin_right = -96.0
+margin_bottom = 368.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/OnBlock_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 18 )
+animation = "On"
+
+[node name="OffBlock_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -80.0
+margin_top = 320.0
+margin_right = -32.0
+margin_bottom = 368.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/OffBlock_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 17 )
+animation = "Off"
+
+[node name="SwitchBlock_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -16.0
+margin_top = 320.0
+margin_right = 32.0
+margin_bottom = 368.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/SwitchBlock_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 19 )
+animation = "On"
+
+[node name="Coin_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -208.0
+margin_top = 320.0
+margin_right = -160.0
 margin_bottom = 368.0
 script = ExtResource( 12 )
 __meta__ = {
@@ -244,5 +313,5 @@ __meta__ = {
 [connection signal="mouse_exited" from="Maker/Tiles" to="Map" method="_on_gui_mouse_exited"]
 [connection signal="pressed" from="Maker/Load_btn" to="Maker" method="_on_Load_btn_pressed"]
 [connection signal="pressed" from="Maker/Save_btn" to="Maker" method="_on_Save_btn_pressed"]
-[connection signal="file_selected" from="Maker/FileDialog" to="Maker" method="_on_FileDialog_file_selected"]
 [connection signal="file_selected" from="Maker/FileDialog" to="Map/Loader" method="_on_FileDialog_file_selected"]
+[connection signal="file_selected" from="Maker/FileDialog" to="Maker" method="_on_FileDialog_file_selected"]

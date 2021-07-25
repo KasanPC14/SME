@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var onBrick = preload("res://Scenes/Instances/SMB1/Tiles/Brick.tscn")
 

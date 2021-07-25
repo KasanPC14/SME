@@ -1,9 +1,12 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Gameplay/CameraFollow.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Instances/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Instances/SMB1/Tiles/OnBlock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Instances/SMB1/Tiles/OffBlock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Map/Map.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Map/MapSettings.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Instances/SMB1/Tiles/SwitchBlock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Coin.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://Font/DownHillFont.tres" type="DynamicFont" id=9]
 [ext_resource path="res://Sounds/SMB1/Tiles/Coin.wav" type="AudioStream" id=10]
@@ -12,6 +15,8 @@
 [ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/AirBrick.tres" type="SpriteFrames" id=13]
 [ext_resource path="res://Scripts/Tiles/AirBrick.gd" type="Script" id=14]
 [ext_resource path="res://Sounds/SMB1/Tiles/Bump.wav" type="AudioStream" id=15]
+[ext_resource path="res://Scenes/Instances/SMB1/Tiles/QuestionBlock.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scripts/GUI/GUI.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.02103, 7.9902 )
@@ -39,8 +44,21 @@ position = Vector2( 480, 584 )
 scale = Vector2( 48, 28 )
 
 [node name="GUI" type="Control" parent="Map/Camera2D"]
-margin_right = 1920.0
-margin_bottom = 1072.0
+margin_left = -896.0
+margin_top = 304.0
+margin_right = 480.0
+margin_bottom = 848.0
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="Map/Camera2D/GUI"]
+margin_left = 80.0
+margin_top = -336.0
+margin_right = 2224.0
+margin_bottom = 878.0
+color = Color( 0.662745, 0.72549, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -87,16 +105,6 @@ margin_bottom = 109.25
 rect_scale = Vector2( 0.25, 0.25 )
 custom_fonts/font = ExtResource( 9 )
 text = "00"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Background" type="ColorRect" parent="Map/Camera2D/GUI"]
-margin_left = -816.0
-margin_top = -32.0
-margin_right = 1328.0
-margin_bottom = 1182.0
-color = Color( 0.662745, 0.72549, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -289,6 +297,22 @@ shape = SubResource( 2 )
 stream = ExtResource( 15 )
 
 [node name="Blocks" type="Node2D" parent="Map/Map"]
+
+[node name="OnBlocks" type="Node2D" parent="Map/Map"]
+
+[node name="OnBlock" parent="Map/Map/OnBlocks" instance=ExtResource( 3 )]
+
+[node name="OffBlocks" type="Node2D" parent="Map/Map"]
+
+[node name="OffBlock" parent="Map/Map/OffBlocks" instance=ExtResource( 4 )]
+
+[node name="SwitchBlocks" type="Node2D" parent="Map/Map"]
+
+[node name="SwitchBlock" parent="Map/Map/SwitchBlocks" instance=ExtResource( 7 )]
+
+[node name="QuestionBlocks" type="Node2D" parent="Map/Map"]
+
+[node name="QuestionBlock" parent="Map/Map/QuestionBlocks" instance=ExtResource( 16 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 720 )

@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 var scene = null
 
+var data = {}
+
 func _ready():
 	scene = get_tree().root.get_child(1)
 	pass
