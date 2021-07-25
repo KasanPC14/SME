@@ -1,24 +1,22 @@
 extends Node
 
-export (String,"Overworld","Underground","Castle") var WorldType = ""
+export (String,"Overworld","Underground","Castle") onready var WorldType = "Overworld"
 
-export (Color,RGBA) var Color_overworld = Color(169,185,255,255)
-export (Color,RGBA) var Color_underground = Color(0,0,0.2,255)
-export (Color,RGBA) var Color_castle = Color(0,0,0,255)
+export (bool) var On = false
 
 func _ready():
-	var bg = $Background
 	
-	if WorldType == "Overworld":
-		bg.color = Color_overworld
-	if WorldType == "Underground":
-		bg.color = Color_underground
-	if WorldType == "Castle":
-		bg.color = Color_castle
-	
-	
+	if WorldType == null:
+		WorldType = "Overworld"
+	print(WorldType)
 	pass
 
-func transferData(old,new) -> void:
-	new.get_node("Player").playerParameters = old.get_node("Player").playerParameters 
-	pass
+func _physics_process(delta):
+	var bg = $Map/Camera2D/GUI/Background
+	
+	if WorldType == "Overworld":
+		bg.color = Color.cornflower
+	if WorldType == "Underground":
+		bg.color = Color.navyblue
+	if WorldType == "Castle":
+		bg.color = Color.black

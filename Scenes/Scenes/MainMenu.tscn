@@ -61,6 +61,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MapMaker_btn" type="Button" parent="Menu UI/Buttons"]
+margin_left = 1072.0
+margin_top = 528.0
+margin_right = 1744.0
+margin_bottom = 688.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 1 )
+text = "Map maker"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Test_btn" type="Button" parent="Menu UI/Buttons"]
 margin_left = 352.0
 margin_top = 672.0
@@ -74,4 +86,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Menu UI/Buttons/LoadMap_btn" to="Menu UI/Buttons" method="_on_LoadMap_btn_pressed"]
+[connection signal="pressed" from="Menu UI/Buttons/MapMaker_btn" to="Menu UI/Buttons" method="_on_MapMaker_btn_pressed"]
 [connection signal="pressed" from="Menu UI/Buttons/Test_btn" to="Menu UI/Buttons" method="_on_Test_btn_pressed"]

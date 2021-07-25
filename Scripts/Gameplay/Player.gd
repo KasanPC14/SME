@@ -4,6 +4,7 @@ export var speed = 200
 export var max_speed = 300
 export var accuration = 10
 export var jump = -450
+var oldJump = jump
 export var gravity = 20
 
 
@@ -40,6 +41,12 @@ func _physics_process(delta):
 	set_keys()
 	movement()
 	set_animations()
+	
+	if motion.x > 0:
+		jump = oldJump - motion.x/2.5
+	else:
+		jump = oldJump + motion.x/2.5
+	
 
 func set_keys():
 	LEFT = Input.is_action_pressed("LEFT")

@@ -1,0 +1,133 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scripts/Gameplay/CameraFollow.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Mario.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Sounds/SMB1/Player/Jump.wav" type="AudioStream" id=3]
+[ext_resource path="res://Scripts/Gameplay/Player.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Map/MapLoader.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Map/MapSettings.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Gameplay/SoundManager.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Coin.tres" type="SpriteFrames" id=8]
+[ext_resource path="res://Font/DownHillFont.tres" type="DynamicFont" id=9]
+[ext_resource path="res://Sounds/SMB1/Tiles/Coin.wav" type="AudioStream" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.46205, 7.36823 )
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource( 6 )
+WorldType = "Overworld"
+Color_overworld = Color( 0.635294, 0.705882, 1, 1 )
+Color_underground = Color( 0, 0, 0.2, 1 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_left = -96.0
+margin_top = -48.0
+margin_right = 2048.0
+margin_bottom = 1166.0
+color = Color( 0.662745, 0.72549, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 16, 752 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+frames = ExtResource( 2 )
+animation = "Slowing"
+playing = true
+
+[node name="Sounds" type="Node" parent="Player"]
+script = ExtResource( 7 )
+
+[node name="Jump" type="AudioStreamPlayer" parent="Player/Sounds"]
+stream = ExtResource( 3 )
+volume_db = -7.301
+
+[node name="Map" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Camera2D" type="Camera2D" parent="Map"]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = 0
+limit_top = 312
+limit_bottom = 0
+script = ExtResource( 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="Map/Camera2D"]
+pause_mode = 1
+position = Vector2( 480, 584 )
+scale = Vector2( 48, 28 )
+
+[node name="GUI" type="Control" parent="Map/Camera2D"]
+margin_right = 1920.0
+margin_bottom = 1072.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InGame" type="Control" parent="Map/Camera2D/GUI"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="COIN" type="Control" parent="Map/Camera2D/GUI/InGame"]
+margin_left = 848.0
+margin_top = 16.0
+margin_right = 888.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="Map/Camera2D/GUI/InGame/COIN"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 8 )
+animation = "Overworld"
+
+[node name="X" type="Label" parent="Map/Camera2D/GUI/InGame/COIN"]
+margin_left = 32.0
+margin_top = 6.30673
+margin_right = 152.0
+margin_bottom = 106.307
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = ExtResource( 9 )
+text = "x"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoinNum" type="Label" parent="Map/Camera2D/GUI/InGame/COIN"]
+margin_left = 51.761
+margin_top = 9.24987
+margin_right = 185.761
+margin_bottom = 109.25
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = ExtResource( 9 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Map" type="Node2D" parent="Map"]
+
+[node name="Bricks" type="Node2D" parent="Map/Map"]
+
+[node name="Coins" type="Node2D" parent="Map/Map"]
+
+[node name="CoinSound" type="AudioStreamPlayer2D" parent="Map/Map/Coins"]
+position = Vector2( 272, 688 )
+scale = Vector2( 2, 2 )
+stream = ExtResource( 10 )
+
+[node name="AirBricks" type="Node2D" parent="Map/Map"]

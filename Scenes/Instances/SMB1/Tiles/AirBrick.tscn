@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sounds/SMB1/Tiles/Bump.wav" type="AudioStream" id=1]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/AirBrick.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scripts/Tiles/AirBrick.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.02103, 7.9902 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 0.193512 )
+
+[node name="AirBrick" type="KinematicBody2D"]
+position = Vector2( 208, 720 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 3 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "Overworld"
+
+[node name="Tweens" type="Node2D" parent="."]
+
+[node name="Tween" type="Tween" parent="Tweens"]
+
+[node name="Tween2" type="Tween" parent="Tweens"]
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Area"]
+modulate = Color( 0.00784314, 1, 0, 1 )
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+
+[connection signal="tween_all_completed" from="Tweens/Tween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="body_entered" from="Area" to="." method="_on_Alt_body_entered"]

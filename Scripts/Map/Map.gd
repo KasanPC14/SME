@@ -5,9 +5,11 @@ var onBrick = preload("res://Scenes/Instances/SMB1/Tiles/Brick.tscn")
 export (int) var MAP_WIDTH = 100
 export (int) var MAP_HEIGHT = 3
 
+
 func _ready():
-	_generate(MAP_WIDTH,MAP_HEIGHT)
 	pass
+	
+	
 	
 func _generate(w,h):
 	
