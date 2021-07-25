@@ -14,3 +14,11 @@ stream = ExtResource( 1 )
 [node name="AirBricks" type="Node2D" parent="."]
 
 [node name="Blocks" type="Node2D" parent="."]
+
+[node name="OnBlocks" type="Node2D" parent="."]
+
+[node name="OffBlocks" type="Node2D" parent="."]
+
+[node name="SwitchBlocks" type="Node2D" parent="."]
+
+[node name="QuestionBlocks" type="Node2D" parent="."]

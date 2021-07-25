@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var data = {}
 
 func _ready():
 	pass

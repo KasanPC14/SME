@@ -6,7 +6,7 @@
 [ext_resource path="res://Sprites/SMB1/SpriteFrames/Mario.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.97902, 7.42411 )
+extents = Vector2( 6.71892, 7.42411 )
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )

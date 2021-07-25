@@ -41,6 +41,10 @@ func _connectAllButtons() -> void:
 	get_node("Brick_btn").connect("pressed",mapMaker,"_on_Brick")
 	get_node("Block_btn").connect("pressed",mapMaker,"_on_Block")
 	get_node("Coin_btn").connect("pressed",mapMaker,"_on_Coin")
+	get_node("OffBlock_btn").connect("pressed",mapMaker,"_on_OffBlock")
+	get_node("OnBlock_btn").connect("pressed",mapMaker,"_on_OnBlock")
+	get_node("SwitchBlock_btn").connect("pressed",mapMaker,"_on_SwitchBlock")
+	get_node("QuestionBlock_btn").connect("pressed",mapMaker,"_on_QuestionBlock")
 	pass
 
 
