@@ -37,10 +37,19 @@ func _on_Load_btn_pressed():
 
 func _connectAllButtons() -> void:
 	var mapMaker = get_parent().get_node("Map")
+	
+	#Tiles
 	get_node("AirBrick_btn").connect("pressed",mapMaker,"_on_AirBrick")
 	get_node("Brick_btn").connect("pressed",mapMaker,"_on_Brick")
 	get_node("Block_btn").connect("pressed",mapMaker,"_on_Block")
 	get_node("Coin_btn").connect("pressed",mapMaker,"_on_Coin")
+	get_node("OffBlock_btn").connect("pressed",mapMaker,"_on_OffBlock")
+	get_node("OnBlock_btn").connect("pressed",mapMaker,"_on_OnBlock")
+	get_node("SwitchBlock_btn").connect("pressed",mapMaker,"_on_SwitchBlock")
+	get_node("QuestionBlock_btn").connect("pressed",mapMaker,"_on_QuestionBlock")
+	
+	#Enemies
+	get_node("Goomba_btn").connect("pressed",mapMaker,"_on_Goomba")
 	pass
 
 

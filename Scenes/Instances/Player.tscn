@@ -1,16 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Gameplay/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Gameplay/SoundManager.gd" type="Script" id=2]
 [ext_resource path="res://Sounds/SMB1/Player/Jump.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sprites/SMB1/SpriteFrames/Mario.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://Sounds/SMB1/Player/smb_stomp.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.97902, 7.42411 )
+extents = Vector2( 6.71892, 7.42411 )
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
+accuration = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -26,3 +28,6 @@ script = ExtResource( 2 )
 [node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 3 )
 volume_db = -7.301
+
+[node name="Stomp" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 5 )

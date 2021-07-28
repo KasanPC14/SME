@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/Gameplay/CameraFollow.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Instances/Player.tscn" type="PackedScene" id=2]
@@ -16,6 +16,11 @@
 [ext_resource path="res://Font/GUIFont.tres" type="DynamicFont" id=14]
 [ext_resource path="res://Font/DownHill64.tres" type="DynamicFont" id=15]
 [ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/Block.tres" type="SpriteFrames" id=16]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/OffBlock.tres" type="SpriteFrames" id=17]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/OnBlock.tres" type="SpriteFrames" id=18]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/OnOffSwitch.tres" type="SpriteFrames" id=19]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Tiles/QuestionBlock.tres" type="SpriteFrames" id=20]
+[ext_resource path="res://Sprites/SMB1/SpriteFrames/Enemies/Goomba.tres" type="SpriteFrames" id=21]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 15 )
@@ -125,20 +130,20 @@ script = ExtResource( 5 )
 
 [node name="Tiles" type="Panel" parent="Maker"]
 modulate = Color( 1, 1, 1, 0.443137 )
-margin_left = -496.0
-margin_top = 304.0
-margin_right = 480.0
-margin_bottom = 384.0
+margin_left = -464.0
+margin_top = 320.0
+margin_right = 464.0
+margin_bottom = 832.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Brick_btn" type="Button" parent="Maker"]
 self_modulate = Color( 0, 0, 0, 0.294118 )
-margin_left = -464.0
-margin_top = 320.0
-margin_right = -416.0
-margin_bottom = 368.0
+margin_left = -448.0
+margin_top = 336.0
+margin_right = -400.0
+margin_bottom = 384.0
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -150,12 +155,30 @@ scale = Vector2( 1.95433, 2 )
 frames = ExtResource( 11 )
 animation = "Overworld"
 
+[node name="Goomba_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -448.0
+margin_top = 400.0
+margin_right = -400.0
+margin_bottom = 448.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/Goomba_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 21 )
+animation = "Overworld"
+speed_scale = 0.75
+
 [node name="AirBrick_btn" type="Button" parent="Maker"]
 self_modulate = Color( 0, 0, 0, 0.294118 )
-margin_left = -400.0
-margin_top = 320.0
-margin_right = -352.0
-margin_bottom = 368.0
+margin_left = -384.0
+margin_top = 336.0
+margin_right = -336.0
+margin_bottom = 384.0
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -169,10 +192,10 @@ animation = "Overworld"
 
 [node name="Block_btn" type="Button" parent="Maker"]
 self_modulate = Color( 0, 0, 0, 0.294118 )
-margin_left = -336.0
-margin_top = 320.0
-margin_right = -288.0
-margin_bottom = 368.0
+margin_left = -320.0
+margin_top = 336.0
+margin_right = -272.0
+margin_bottom = 384.0
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -184,12 +207,76 @@ scale = Vector2( 1.95433, 2 )
 frames = ExtResource( 16 )
 animation = "Overworld"
 
+[node name="QuestionBlock_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -256.0
+margin_top = 336.0
+margin_right = -208.0
+margin_bottom = 384.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/QuestionBlock_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 20 )
+animation = "Overworld"
+
+[node name="OnBlock_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -128.0
+margin_top = 336.0
+margin_right = -80.0
+margin_bottom = 384.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/OnBlock_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 18 )
+animation = "On"
+
+[node name="OffBlock_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_left = -64.0
+margin_top = 336.0
+margin_right = -16.0
+margin_bottom = 384.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/OffBlock_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 17 )
+animation = "Off"
+
+[node name="SwitchBlock_btn" type="Button" parent="Maker"]
+self_modulate = Color( 0, 0, 0, 0.294118 )
+margin_top = 336.0
+margin_right = 48.0
+margin_bottom = 384.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maker/SwitchBlock_btn"]
+position = Vector2( 24, 24 )
+scale = Vector2( 1.95433, 2 )
+frames = ExtResource( 19 )
+animation = "On"
+
 [node name="Coin_btn" type="Button" parent="Maker"]
 self_modulate = Color( 0, 0, 0, 0.294118 )
-margin_left = -272.0
-margin_top = 320.0
-margin_right = -224.0
-margin_bottom = 368.0
+margin_left = -192.0
+margin_top = 336.0
+margin_right = -144.0
+margin_bottom = 384.0
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -202,10 +289,10 @@ frames = ExtResource( 8 )
 animation = "Overworld"
 
 [node name="Load_btn" type="Button" parent="Maker"]
-margin_left = 416.0
-margin_top = 320.0
-margin_right = 608.0
-margin_bottom = 512.0
+margin_left = 400.0
+margin_top = 336.0
+margin_right = 592.0
+margin_bottom = 528.0
 rect_scale = Vector2( 0.25, 0.25 )
 theme = SubResource( 1 )
 text = "Load"
@@ -214,10 +301,10 @@ __meta__ = {
 }
 
 [node name="Save_btn" type="Button" parent="Maker"]
-margin_left = 352.0
-margin_top = 320.0
-margin_right = 544.0
-margin_bottom = 512.0
+margin_left = 336.0
+margin_top = 336.0
+margin_right = 528.0
+margin_bottom = 528.0
 rect_scale = Vector2( 0.25, 0.25 )
 theme = SubResource( 2 )
 text = "Save"

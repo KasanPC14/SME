@@ -2,7 +2,7 @@ extends Node2D
 
 export (String,"Overworld","Underground","Castle") var WorldType = "Overworld"
 
-export (bool) var On = false
+export (bool) var On = true
 
 func _ready():
 	
