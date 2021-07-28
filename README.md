@@ -1,4 +1,4 @@
 # SMF
-SUPER MARIO BROS MAKER
+SMB1 EDITOR
 
 used Godot game engine
